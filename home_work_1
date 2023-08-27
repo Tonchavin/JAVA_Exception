@@ -1,0 +1,21 @@
+import random
+
+
+def create_arr():
+    n = random.randint(2, 6)
+    m = random.randint(2, 6)
+    a = [[j for j in range(m)] for i in range(n)]
+    return a
+
+
+def check_arr(a):
+    for i in a:
+        for j in a[i]:
+            if i == j & len(a[i]) == len(a[j]):
+                print(a[i, j])
+            else:
+                print("nenohno")
+
+
+if __name__ == '__main__':
+    print(create_arr())
