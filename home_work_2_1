@@ -1,0 +1,24 @@
+package org.example;
+
+import java.util.Scanner;
+
+public class home_work_2_1 {
+
+    public static void main(String[] args) {
+        Float num = getFloatNumber();
+        System.out.println("\n" + "You entered a number: " + num);
+    }
+
+    public static Float getFloatNumber() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a fractional number, use the dot symbol as a separator.");
+        while (true) {
+            try {
+                return Float.parseFloat(scanner.nextLine());
+
+            } catch (NumberFormatException e) {
+                System.out.println("\n" + "Invalid number format");
+            }
+        }
+    }
+}
