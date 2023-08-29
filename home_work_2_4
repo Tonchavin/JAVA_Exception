@@ -1,0 +1,29 @@
+package org.example;
+
+import java.util.Scanner;
+
+public class home_work_2_4 {
+
+    public static void main(String[] args) {
+        String input = getNotEmpty();
+        System.out.println(input);
+    }
+
+    public static String getNotEmpty() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter data: ");
+        while (true) {
+            try {
+                String input = scanner.nextLine().trim();
+                if (input.isEmpty()) {
+                    throw new Exception();
+                }
+                return input;
+
+            } catch (Exception e) {
+                System.out.println("Error:Empty string!");
+                System.out.println("Please enter data: ");
+            }
+        }
+    }
+}
