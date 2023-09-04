@@ -1,0 +1,150 @@
+package org.example;
+
+import java.io.*;
+import java.util.*;
+
+public class home_work_3 {
+    static class data_parser {
+        static String name;
+        static String family;
+        static String surname;
+        static String birthday;
+        static long phone;
+        static String gender;
+
+        public String getName() {
+            return name;
+        }
+
+        public String getFamily() {
+            return family;
+        }
+
+        public String getSurname() {
+            return surname;
+        }
+
+        public String getBirthday() {
+            return birthday;
+        }
+
+        public int getPhone() {
+            return (int) phone;
+        }
+
+        public String getGender() {
+            return gender;
+        }
+
+        public void setGender(String gender) {
+            this.gender = gender;
+        }
+    }
+
+    public static void main(String[] args) {
+        String menu = ("Введите нужную цифру опции: \n\n" +
+                "1. Ввести данные пользователя в формате через пробел: " +
+                "Фамилия,Имя,Отчество,День рождения,телефон,пол \n" +
+                "                                              Пример: Федорова Мария Ивановна 12081988 89008002424 Ж\n" +
+                "2. ----\n" +
+                "3. ------\n" +
+                "4. ---------\n");
+        System.out.println(menu);
+
+        Scanner scanner = new Scanner(System.in);
+        String title = scanner.nextLine();
+        int number = Integer.parseInt(title);
+        switch (number) {
+            case 1 -> {
+                System.out.println("Выбрана опция: 1\n");
+                DataParser();
+            }
+            case 2 -> System.out.println("Выбрана опция: 2\n");
+            case 3 -> System.out.println("Выбрана опция: 3\n");
+            case 4 -> System.out.println("Выбрана опция: 4\n");
+            default -> System.out.println("Ведина неверная цифра!\n");
+        }
+    }
+
+    private static void DataParser() {
+        Scanner scanner = new Scanner(System.in);
+        String title = scanner.nextLine();
+
+        String[] words = title.split(" ");
+
+        if (words.length == 6) {
+            for (String subStr : words) {
+                String word0 = words[0];
+                String word1 = words[1];
+                String word2 = words[2];
+                String word5 = words[5];
+                boolean hasDigits = false;
+                for (int i = 0; i < word0.length() && !hasDigits; i++) {
+                    if (Character.isDigit(word0.charAt(i))) {
+                        hasDigits = true;
+                    }
+                }
+                if (hasDigits) {
+                    System.out.println("Цифры в фамилии не допустимы");
+                }
+                hasDigits = false;
+                for (int i = 0; i < word1.length() && !hasDigits; i++) {
+                    if (Character.isDigit(word1.charAt(i))) {
+                        hasDigits = true;
+                    }
+                }
+                if (hasDigits) {
+                    System.out.println("Цифры в имени не допустимы");
+                }
+                hasDigits = false;
+                for (int i = 0; i < word2.length() && !hasDigits; i++) {
+                    if (Character.isDigit(word2.charAt(i))) {
+                        hasDigits = true;
+                    }
+                }
+                if (hasDigits) {
+                    System.out.println("Цифры в отчестве не допустимы");
+                }
+                hasDigits = false;
+                for (int i = 0; i < word5.length() && !hasDigits; i++) {
+                    if (Character.isDigit(word5.charAt(i))) {
+                        hasDigits = true;
+                    }
+                }
+                if (hasDigits) {
+                    System.out.println("пол не может быть цифрой");
+                }
+                data_parser.family = words[0];
+                data_parser.name = words[1];
+                data_parser.surname = words[2];
+                try {
+                    data_parser.birthday = String.valueOf(Integer.parseInt(words[3]));
+                } catch (NumberFormatException e) {
+                    System.out.println("Дата не является числом");
+                }
+                try {
+                    data_parser.phone = Long.parseLong(words[4]);
+                } catch (NumberFormatException e) {
+                    System.out.println("Номер телефона не является числом");
+                }
+                data_parser.gender = words[5];
+            }
+            System.out.println(Arrays.toString(words));
+        }
+        try {
+            if (words.length < 6) {
+                System.out.println("Не достаточно данных! ");
+            } else if (words.length > 6) {
+                System.out.println("Лишние данные!");
+            }
+        } catch (Exception e) {
+            System.out.println("Не верные данные!");
+        }
+        try (FileWriter writer = new FileWriter(data_parser.family,true)) {
+            writer.write(data_parser.family + " " + data_parser.name + " " + data_parser.surname + " " + data_parser.birthday + " " + data_parser.phone + " " + data_parser.gender + " " + System.getProperty("line.separator"));
+            writer.flush();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+}
